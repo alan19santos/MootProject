@@ -107,7 +107,7 @@ class ProdutoFiltroTest extends TestCase
 
         Livewire::test(ProdutoFiltro::class)
             ->set('nome', 'Qualquer coisa')
-            ->call('clearFilter')
+            ->call('clearFilte')
             ->assertSet('nome', '')
             ->assertSee($produto->nome);
     }
