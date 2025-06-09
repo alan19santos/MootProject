@@ -1,0 +1,24 @@
+
+services:
+    app:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: Moot_app
+      ports:
+        - 8000:8000
+      volumes:
+        - .:/var/www
+      depends_on:
+        - db
+
+
+    db:
+      image: mysql:8.0
+      container_name: mysql_db
+      restart: always
+      environment:
+        MYSQL_DATABASE: moot
+        MYSQL_ROOT_PASSWORD: root
+      ports:
+        - 3306:3306
