@@ -9,14 +9,19 @@
             @endforeach
         </select>
 
+
         <select wire:model="marca_id" multiple>
             <!-- <option value="">Todas as marcas</option> -->
             @foreach($marcas as $marca)
                 <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
             @endforeach
         </select>
-        <button wire:click="filtrar">Pesquisar</button>
-        <button wire:click="clearFilte">Limpar</button>
+
+        <div>
+            <button wire:click="filtrar">Pesquisar</button>
+
+            <button wire:click="clearFilte">Limpar</button>
+        </div>
     </div>
 
     <table border="1" cellpadding="10">

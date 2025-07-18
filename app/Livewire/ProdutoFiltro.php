@@ -15,6 +15,12 @@ class ProdutoFiltro extends Component
     public $marca_id = [];
     public $produtos = [];
 
+    protected $queryString = [
+        'nome' => ['except' => ''],
+        'categoria_id' => ['except' => []],
+        'marca_id' => ['except' => []],
+    ];
+
     public function mount()
     {
         $this->filtrar(); // mostra tudo inicialmente
@@ -24,8 +30,8 @@ class ProdutoFiltro extends Component
     {
         $this->produtos = Produto::with(['categoria', 'marca'])
             ->when(!empty($this->nome), fn($q) => $q->where('nome', 'like', "%{$this->nome}%"))
-            ->when(!empty($this->categoria_id), fn($q) => $q->where('categoria_id', $this->categoria_id))
-            ->when(!empty($this->marca_id), fn($q) => $q->where('marca_id', $this->marca_id))
+            ->when(!empty($this->categoria_id), fn($q) => $q->whereIn('categoria_id', $this->categoria_id))
+            ->when(!empty($this->marca_id), fn($q) => $q->whereIn('marca_id', $this->marca_id))
             ->get();
     }
 
